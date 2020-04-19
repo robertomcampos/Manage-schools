@@ -1,0 +1,21 @@
+<div class="container">
+    <h1>Escolas</h1>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let school of schools">
+                <th scope="row">1</th>
+                <td>{{school.name}}</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
