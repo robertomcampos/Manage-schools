@@ -3,22 +3,30 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 import { AppComponent } from './app.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
 import { SchoolListComponent } from './school/school-list.component';
 import { SchoolCreateComponent } from './school/school-create-component';
 import { ClassListComponent } from './class/class-list.component';
+import { ClassCreateComponent } from './class/class-create-component';
 
 @NgModule({
   imports: [
     BrowserModule,
     ReactiveFormsModule,
     HttpClientModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-top-center',
+    }),
     RouterModule.forRoot([
       { path: 'schools', component: SchoolListComponent },
       { path: 'schools/new', component: SchoolCreateComponent },
       { path: 'classes', component: ClassListComponent },
+      { path: 'classes/new', component: ClassCreateComponent },
     ])
   ],
   declarations: [
@@ -26,7 +34,8 @@ import { ClassListComponent } from './class/class-list.component';
     TopBarComponent,
     SchoolListComponent,
     SchoolCreateComponent,
-    ClassListComponent
+    ClassListComponent,
+    ClassCreateComponent,
   ],
   bootstrap: [AppComponent]
 })

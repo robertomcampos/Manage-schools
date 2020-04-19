@@ -2,16 +2,17 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import Constants from '../constants';
+import { NotificationService } from './notification.service';
 
 const httpOptions = {
     headers: new HttpHeaders({
-      'Content-Type': 'application/json'
+        'Content-Type': 'application/json'
     })
-  }
+}
 
 @Injectable({
     providedIn: 'root',
-  })
+})
 export class ApiClient<T> {
 
     constructor(private httpClient: HttpClient) { }
@@ -27,17 +28,16 @@ export class ApiClient<T> {
 
 @Injectable({
     providedIn: 'root',
-  })
+})
 export class HandleApiError {
+
+    constructor(private notificationService: NotificationService) { }
+
     handleError<T>(operation = 'operation', result?: T) {
         return (error: any): Observable<T> => {
-            this.log(`${operation} failed: ${error.message}`);
+            this.notificationService.showError(`${operation} failed: ${error.message}`);
             return of(result as T);
         };
-    }
-
-    private log(message: string) {
-        console.error(message);
     }
 }
 

@@ -9,7 +9,7 @@ import { School } from './school';
 })
 
 export class SchoolListComponent {
-  schools: School[];
+  schools: School[] ;
 
   constructor(schoolService: SchoolService) {
 

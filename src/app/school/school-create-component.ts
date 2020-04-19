@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { SchoolService } from './school-service';
 import { Router } from '@angular/router';
+import { School } from './school';
+import { NotificationService } from '../services/notification.service';
 
 @Component({
     selector: 'app-school-create',
@@ -10,10 +12,18 @@ import { Router } from '@angular/router';
 })
 
 export class SchoolCreateComponent {
+    schools: School[] = [];
+
     constructor(
         private schoolService: SchoolService,
+        private notificationService: NotificationService,
         private router: Router
-    ) { }
+    ) { 
+        this.schoolService.get().subscribe((result) => {
+            this.schools = result;
+          });
+       
+    }
 
     schoolForm = new FormGroup({
         name: new FormControl(''),
@@ -22,10 +32,11 @@ export class SchoolCreateComponent {
 
     onSubmit() {
         const { name, address } = this.schoolForm.value;
+        
         this.schoolService.create({ name, address })
-            .subscribe((result) => {
-                console.log(result);
-                // this.router.navigateByUrl('/schools');
-            });
+        .subscribe((result) => {
+            this.notificationService.showSuccess(`A Escola "${result.name}" foi criada com sucesso.`);
+            this.router.navigateByUrl('/schools');
+        });
     }
 }

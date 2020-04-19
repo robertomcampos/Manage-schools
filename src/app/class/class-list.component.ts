@@ -9,7 +9,6 @@ import { Class } from './class';
 })
 
 export class ClassListComponent {
-  title: string;
   classes: Class[];
 
   constructor(classService: ClassService) {

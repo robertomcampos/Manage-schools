@@ -19,4 +19,12 @@ export class ClassService {
       catchError(this.handleApiError.handleError<Class[]>('listing classess'))
     );
   }
+
+  create(data: Class): Observable<Class> {
+    return this.apiClient.post('/class', data)
+      .pipe(
+        tap(_ => console.log('creating a class')),
+        catchError(this.handleApiError.handleError<Class>('creating a class'))
+      );
+  }
 }
