@@ -4,7 +4,7 @@
         <div class="form-group">
             <label>Escola:</label>
             <select formControlName="schoolId" required class="form-control" id="school">
-                <option value="">Selecione uma escola</option>
+                <option value="">Selecione uma Escola</option>
                 <option *ngFor="let school of schools" [ngValue]="school.id">{{school.name}}</option>
             </select>
         </div>

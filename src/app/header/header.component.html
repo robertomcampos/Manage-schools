@@ -8,6 +8,9 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <ul class="navbar-nav mr-auto">
+        <li class="nav-item" [ngClass]="{'active': activeItem==0}">
+          <a class="nav-link pointer" (click)="onClick(0)">Home</a>
+        </li>
         <li class="nav-item" [ngClass]="{'active': activeItem==1}">
           <a class="nav-link pointer" (click)="onClick(1)">Escolas</a>
         </li>

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { Class } from '../class/class';
 
 @Component({
   selector: 'app-header',
@@ -9,15 +10,21 @@ import { Router } from '@angular/router';
 
 export class HeaderComponent {
   activeItem: number = 1;
+  SCHOOLS = 1;
+  CLASSES = 2;
 
   constructor(private router: Router) { }
 
   onClick(value: number) {
     this.activeItem = value;
 
-    if (value === 1)
-      return this.router.navigateByUrl('/schools');
-
-    return this.router.navigateByUrl('/classes');
+    switch (value) {
+      case this.SCHOOLS:
+        return this.router.navigateByUrl('/schools');
+      case this.CLASSES:
+        return this.router.navigateByUrl('/classes');
+      default:
+        return this.router.navigateByUrl('/schools');
+    }
   }
 }
