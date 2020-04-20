@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { SchoolService } from './school-service';
 import { School } from './school';
+import { IPaging } from '../model/paginate.model';
 
 @Component({
   selector: 'app-school-list',
@@ -9,13 +10,25 @@ import { School } from './school';
 })
 
 export class SchoolListComponent {
-  schools: School[] ;
+  schools: School[] = [];
+  page: number = 1;
+  total: number;
+  pageSize: number;
 
-  constructor(schoolService: SchoolService) {
+  constructor(private schoolService: SchoolService) {
+    this.fetchData();
+  }
 
-    schoolService.get().subscribe((result) => {
-      this.schools = result;
+  fetchData() {
+    this.schoolService.get({ page: this.page, limit: this.pageSize }).subscribe((result: IPaging<School>) => {
+      this.total = result.totalCount;
+      this.pageSize = result.pageSize;
+      this.schools = result.items;
     });
-    
+  }
+
+  onPageChange(event: number) {
+    this.page = event;
+    this.fetchData();
   }
 }

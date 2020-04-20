@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { SchoolService } from './school-service';
 import { Router } from '@angular/router';
-import { School } from './school';
 import { NotificationService } from '../services/notification.service';
 
 @Component({
@@ -12,18 +11,11 @@ import { NotificationService } from '../services/notification.service';
 })
 
 export class SchoolCreateComponent {
-    schools: School[] = [];
-
     constructor(
         private schoolService: SchoolService,
         private notificationService: NotificationService,
         private router: Router
-    ) { 
-        this.schoolService.get().subscribe((result) => {
-            this.schools = result;
-          });
-       
-    }
+    ) {}
 
     schoolForm = new FormGroup({
         name: new FormControl(''),

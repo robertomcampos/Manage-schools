@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import Constants from '../constants';
 import { NotificationService } from './notification.service';
+import { IPaging } from '../model/paginate.model';
 
 const httpOptions = {
     headers: new HttpHeaders({
@@ -13,16 +14,16 @@ const httpOptions = {
 @Injectable({
     providedIn: 'root',
 })
-export class ApiClient<T> {
+export class ApiClient {
 
     constructor(private httpClient: HttpClient) { }
 
-    get(url: string): Observable<T[]> {
-        return this.httpClient.get<T[]>(`${Constants.API_BASE_URL}${url}`);
+    get(url: string): Observable<any> {
+        return this.httpClient.get(`${Constants.API_BASE_URL}${url}`);
     }
 
-    post(url: string, data: T): Observable<T> {
-        return this.httpClient.post<T>(`${Constants.API_BASE_URL}${url}`, data, httpOptions);
+    post(url: string, data: any): Observable<any> {
+        return this.httpClient.post(`${Constants.API_BASE_URL}${url}`, data, httpOptions);
     }
 }
 

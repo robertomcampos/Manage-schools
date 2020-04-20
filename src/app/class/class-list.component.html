@@ -10,14 +10,21 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let class of classes">
+            <tr *ngFor="let class of classes | paginate: {
+                id: 'listing_pagination',
+                itemsPerPage: pageSize,
+                currentPage: page,
+                totalItems: total
+            }">
                 <td>{{class.name}}</td>
                 <td>{{class.school.name}}</td>
                 <td>{{class.createdDate | date:'dd/MM/yyyy HH:mm:ss'}}</td>
             </tr>
         </tbody>
     </table>
-    <div class="empty-list" *ngIf="!classes.length">
-        Nenhuma turma cadastrada.
+    <div *ngIf="classes.length">
+        <pagination-controls class="text-center" id="listing_pagination" maxSize="5" directionLinks="true"
+            (pageChange)="onPageChange($event)" previousLabel="Anterior" nextLabel="Próxima">
+        </pagination-controls>
     </div>
 </div>

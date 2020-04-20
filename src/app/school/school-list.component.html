@@ -10,14 +10,21 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let school of schools">
+            <tr *ngFor="let school of schools | paginate: {
+                id: 'listing_pagination',
+                itemsPerPage: pageSize,
+                currentPage: page,
+                totalItems: total
+            }">
                 <td>{{school.name}}</td>
                 <td>{{school.address}}</td>
                 <td>{{school.createdDate | date:'dd/MM/yyyy HH:mm:ss'}}</td>
             </tr>
         </tbody>
     </table>
-    <div class="empty-list" *ngIf="!schools.length">
-        Nenhuma escola cadastrada.
+    <div *ngIf="schools.length">
+        <pagination-controls class="text-center" id="listing_pagination" maxSize="5" directionLinks="true"
+            (pageChange)="onPageChange($event)" previousLabel="Anterior" nextLabel="Próxima">
+        </pagination-controls>
     </div>
 </div>

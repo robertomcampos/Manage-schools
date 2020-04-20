@@ -3,20 +3,31 @@ import { School } from './school';
 import { ApiClient, HandleApiError } from '../services/apiClient'
 import { Observable } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
+import { IPaging, IPagingParams } from '../model/paginate.model';
+import { toParams } from '../services/toParams';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SchoolService {
   constructor(
-    private apiClient: ApiClient<School>,
+    private apiClient: ApiClient,
     private handleApiError: HandleApiError) { }
 
-  get(): Observable<School[]> {
-    return this.apiClient.get('/school')
+  getAll(): Observable<School[]> {
+    return this.apiClient.get(`/school/all`)
       .pipe(
-        tap(_ => console.log('listing schools')),
-        catchError(this.handleApiError.handleError<School[]>('listing schools'))
+        tap(_ => console.log('listing classes')),
+        catchError(this.handleApiError.handleError<IPaging<School[]>>('listing classess'))
+      );
+  }
+
+  get(params: IPagingParams): Observable<IPaging<School>> {
+    const query = toParams(params);
+    return this.apiClient.get(`/school?${query}`)
+      .pipe(
+        tap(_ => console.log('listing classes')),
+        catchError(this.handleApiError.handleError<IPaging<School>>('listing classess'))
       );
   }
 

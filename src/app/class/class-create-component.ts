@@ -21,7 +21,7 @@ export class ClassCreateComponent {
         private notificationService: NotificationService,
         private router: Router
     ) {
-        this.schoolService.get().subscribe((result) => {
+        this.schoolService.getAll().subscribe((result) => {
             this.schools = result;
         });
     }

@@ -5,9 +5,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 import { AppComponent } from './app.component';
-import { TopBarComponent } from './top-bar/top-bar.component';
+import { HeaderComponent } from './header/header.component';
 import { SchoolListComponent } from './school/school-list.component';
 import { SchoolCreateComponent } from './school/school-create-component';
 import { ClassListComponent } from './class/class-list.component';
@@ -22,6 +23,7 @@ import { ClassCreateComponent } from './class/class-create-component';
     ToastrModule.forRoot({
       positionClass: 'toast-top-center',
     }),
+    NgxPaginationModule,
     RouterModule.forRoot([
       { path: 'schools', component: SchoolListComponent },
       { path: 'schools/new', component: SchoolCreateComponent },
@@ -31,7 +33,7 @@ import { ClassCreateComponent } from './class/class-create-component';
   ],
   declarations: [
     AppComponent,
-    TopBarComponent,
+    HeaderComponent,
     SchoolListComponent,
     SchoolCreateComponent,
     ClassListComponent,
